@@ -115,25 +115,26 @@ SetSignup({...signup,[name]:value})
     const SignupUser = async (e) => {
         e.preventDefault();
         try {
-            const { username, email, password, firstname, lastname, phone } = signup; // Access variables from the signup state
-            const data = await fetch("https://walmartbackend-1.onrender.com/user/register", {
+            const { username, email, password, firstname, lastname, phone } = signup; 
+            console.log(username);
+            const data = await fetch("https://walmartbackend-1.onrender.com/user/signup", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    firstname,
+                    lastname,
                     username,
                     email,
                     password,
-                    firstname,
-                    lastname,
                     phone
                 })
             });
             const Res = await data.json();
             console.log(Res);
         } catch (error) {
-            console.error("Error occurred while signing up:", error);
+            console.error("Error occurred while signing up", error.message);
         }
     }
     
